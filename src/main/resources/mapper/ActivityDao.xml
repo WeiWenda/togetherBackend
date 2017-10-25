@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.together.vivid.dao.ActivityDao">
+    <select id="queryByClubId" resultType="Activity">
+        select * from activities where club_id = #{club_id} and
+         DATE_SUB(CURRENT_DATE, INTERVAL #{time} DAY) &lt;= date(start_time)
+    </select>
+    <select id="queryPreparing" resultType="Activity">
+        select a.* from activities a inner join participate p on a.activity_id = p.activity_id
+         where CURRENT_TIME &lt;=  a.start_time and CURRENT_TIME &gt;= a.close_time and p.user_id = #{user_id};
+    </select>
+    <select id="queryGoing" resultType="Activity">
+        select a.* from activities a inner join participate p on a.activity_id = p.activity_id
+        where CURRENT_TIME &lt;=  a.end_time and CURRENT_TIME &gt;= a.start_time and p.user_id = #{user_id};
+    </select>
+
+    <select id="queryDoneSeq1" resultType="Activity">
+        select a.* from activities a inner join participate p on a.activity_id = p.activity_id
+        where CURRENT_TIME &gt;= a.end_time and p.user_id = #{user_id}
+        order by a.start_time desc
+        limit #{offset},#{page_size};
+    </select>
+    <select id="queryDoneSeq2" resultType="Activity">
+        select a.* from activities a inner join participate p on a.activity_id = p.activity_id
+        where CURRENT_TIME &gt;= a.end_time and  a.start_time BETWEEN #{start} and #{end} and p.user_id = #{user_id}
+        order by a.start_time desc
+    </select>
+    <insert id="saveActivity" parameterType="Activity" keyProperty="activityId">
+        <!-- ignore 主键冲突，报错 -->
+        INSERT ignore INTO activities (club_id, organizer_id,name,introduction
+        ,start_time,end_time,close_time,favicon,privilege,notes)
+        VALUES (#{clubId},#{organizerId},#{name},#{introduction},#{startTime},#{endTime},#{closeTime},#{favicon},#{privilege},#{notes})
+    </insert>
+    <delete id="removeActivity">
+        DELETE from activities where activity_id = #{activity_id}
+    </delete>
+
+</mapper>

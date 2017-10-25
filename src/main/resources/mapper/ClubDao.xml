@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.together.vivid.dao.ClubDao">
+    <select id="queryByChiefId" resultType="Club">
+        select * from clubs where chief_id = #{user_id}
+    </select>
+    <select id="queryByMemberId" resultType="Club">
+        select c.*,m.level
+        from  membership m inner join clubs c on m.club_id = c.club_id
+        where m.user_id = #{user_id} and c.chief_id &lt;&gt; #{user_id}
+    </select>
+    <insert id="saveClub" parameterType="Club" keyProperty="clubId">
+        <!-- ignore 主键冲突，报错 -->
+        INSERT ignore INTO clubs (chief_id, address,name,slogan,introduction,callnumber,size,upper_size,chief_name,favicon)
+        VALUES (#{chiefId},#{address},#{name},#{slogan},#{introduction},#{callnumber},#{size},#{upperSize},#{chiefName},#{favicon})
+    </insert>
+    <delete id="removeClub">
+        DELETE from clubs where club_id = #{club_id}
+    </delete>
+
+</mapper>

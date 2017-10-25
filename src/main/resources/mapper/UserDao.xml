@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.together.vivid.dao.UserDao">
+    <!-- 目的：为dao接口方法提供sql语句配置 -->
+    <update id="updateById">
+        update users set
+        <choose>
+            <when test="domain == 'birthday'">
+              ${domain} = str_to_date(#{value},'%Y-%m-%d')
+            </when>
+            <otherwise>
+              ${domain} = #{value}
+            </otherwise>
+        </choose>
+        where user_id = #{user_id}
+    </update>
+    <select id="queryById" resultType="User" parameterType="int">
+        <!-- 具体的sql -->
+        SELECT
+        *
+        FROM
+        users
+        WHERE
+        user_id = #{user_id}
+    </select>
+    <select id="queryByPhone" resultType="User">
+        <!-- 具体的sql -->
+        SELECT
+        *
+        FROM
+        users
+        WHERE
+        phone = #{phone} and password = #{password}
+    </select>
+    <select id="queryByEmail" resultType="User">
+        <!-- 具体的sql -->
+        SELECT
+        *
+        FROM
+        users
+        WHERE
+        e_mail = #{email} and password = #{password}
+    </select>
+    <select id="queryByClubID" resultType="User">
+        select u.*,m.level from users u inner join membership m on u.user_id = m.user_id
+        where m.club_id = #{club_id}
+    </select>
+
+
+</mapper>
