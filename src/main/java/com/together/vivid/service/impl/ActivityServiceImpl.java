@@ -65,4 +65,14 @@ public class ActivityServiceImpl implements ActivityService {
         activityDao.removeActivity(activity_id);
 
     }
+
+    @Override
+    public Activity getById(int id) {
+        int partCount = activityDao.getPartCount(id);
+        Activity activity = activityDao.getById(id);
+        activity.setPartcount(partCount);
+        if(activity.getPrivilege()==1)
+            activity.setClubName(activityDao.getClubName(id));
+        return activity;
+    }
 }

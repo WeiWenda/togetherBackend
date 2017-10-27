@@ -33,6 +33,18 @@
         ,start_time,end_time,close_time,favicon,privilege,notes)
         VALUES (#{clubId},#{organizerId},#{name},#{introduction},#{startTime},#{endTime},#{closeTime},#{favicon},#{privilege},#{notes})
     </insert>
+    <select id="getById" resultType="Activity">
+        select a.*,u.name as organizer_name  from activities a,users u  where
+        a.activity_id = #{id} and a.organizer_id = u.user_id
+    </select>
+    <select id="getPartCount" resultType="Integer">
+        select count(*) from activities a,participate p where
+        a.activity_id = #{id} and a.activity_id = p.activity_id
+    </select>
+    <select id="getClubName" resultType="String">
+        select c.name from activities a,clubs c WHERE
+        a.activity_id = #{id} and a.club_id = c.club_id
+    </select>
     <delete id="removeActivity">
         DELETE from activities where activity_id = #{activity_id}
     </delete>

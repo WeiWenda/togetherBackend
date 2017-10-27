@@ -27,6 +27,14 @@ public class Result<T> {
         this.success = success;
         this.data = data;
     }
+    // 成功T为String时的构造器
+    public Result(T data,boolean success) {
+        this.success = success;
+        if(success)
+            this.data = data;
+        else
+            this.error =data.toString();
+    }
     // 错误时的构造器
     public Result(boolean success, String error) {
         this.success = success;

@@ -58,6 +58,7 @@ public interface UserService {
     /**
      *@Author:weiwenda
      *@Description:获取历史参加活动,使用翻页模式或起止模式
+     * 翻页模式下，page_size表示每次显示的个数，offset 表示请求第几页数据,从0开始
      *@Date:15:18 2017/9/28
      */
     List<Activity> getDoneActivity(int user_id,int page_size,int offset);
@@ -75,4 +76,5 @@ public interface UserService {
      *@Date:17:24 2017/10/18
      */
     Boolean saveHabit(Habit unit);
+
 }

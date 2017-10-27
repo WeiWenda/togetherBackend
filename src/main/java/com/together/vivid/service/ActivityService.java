@@ -45,4 +45,10 @@ public interface ActivityService {
      *@Date:15:50 2017/10/24
      */
     void removeActivity(int activity_id);
+    /**
+    * @Author: weiwenda
+    * @Description: 根据活动id获取活动的详细信息
+    * @Date: 下午10:16 2017/10/26
+    */
+    Activity getById(int id);
 }

@@ -3,6 +3,7 @@ package com.together.vivid.web;
 import com.qiniu.util.Auth;
 import com.qiniu.util.StringMap;
 import com.together.vivid.dto.GroupedHabit;
+import com.together.vivid.dto.ParticipateStateEnum;
 import com.together.vivid.dto.Result;
 import com.together.vivid.entity.Activity;
 import com.together.vivid.entity.Club;
@@ -31,6 +32,8 @@ public class UserController {
     private UserService userService;
     @Autowired
     private PublicService publicService;
+    @Autowired
+    private ActivityService activityService;
     @RequestMapping(value = "/upload",method = RequestMethod.GET)
     @ResponseBody private String upload(@RequestParam("user_id") int user_id){
         String accessKey = "a6Qq5SEfmJxBBNDwpDh5sMX4c03Al3Hn-rHX3CyS";
@@ -44,11 +47,16 @@ public class UserController {
     @ResponseBody private Result<List<GroupedHabit>> getHabits(){
         return new Result<List<GroupedHabit>>(true,publicService.getLabels());
     }
+    @RequestMapping(value = "/signUp",method = RequestMethod.POST,produces = {"application/json; charset=utf-8" })
+    @ResponseBody private Result<String> actParticipate(@RequestParam("user_id") int user_id,
+                                                                      @RequestParam("activity_id")int activity_id){
+        return new Result<String>(activityService.signUp(user_id,activity_id).getStateInfo(),true);
+    }
     @RequestMapping(value = "/addLabel",method = RequestMethod.POST, produces = {"application/json; charset=utf-8" })
-    @ResponseBody private Result<Boolean> addLabel(@RequestBody Habit unit){
+    @ResponseBody private Result<String> addLabel(@RequestBody Habit unit){
         Boolean tmp = userService.saveHabit(unit);
-        if(!tmp) return new Result<Boolean>(false,"更新失败");
-        else return new Result<Boolean>(true,true);
+        if(!tmp) return new Result<String>("更新失败",false);
+        else return new Result<String>("更新成功",true);
     }
     @RequestMapping(value = "/getClubList",method = RequestMethod.POST, produces = {"application/json; charset=utf-8" })
     @ResponseBody private Result<List<Club>> getClubs(@RequestParam("type") String type,@RequestParam("user_id") int user_id){
@@ -65,7 +73,7 @@ public class UserController {
             case "going":
                 return new Result<>(true,userService.getGoingActivity(user_id));
             case "done":
-                return new Result<>(true,userService.getDoneActivity(user_id,4,1));
+                return new Result<>(true,userService.getDoneActivity(user_id,4,0));
             case "preparing":
                 return new Result<>(true,userService.getPreparingActivity(user_id));
         }
@@ -73,11 +81,11 @@ public class UserController {
     }
 
     @RequestMapping(value = "/update",method = RequestMethod.POST, produces = {"application/json; charset=utf-8" })
-    @ResponseBody private Result<Boolean> update(@RequestBody UpdateUnit unit){
+    @ResponseBody private Result<String> update(@RequestBody UpdateUnit unit){
         System.out.printf(unit.user_id+""+unit.domain+""+unit.value);
         Boolean tmp = userService.updateById(unit.user_id,unit.domain,unit.value);
-        if(!tmp) return new Result<Boolean>(false,"更新失败");
-        else return new Result<Boolean>(true,true);
+        if(!tmp) return new Result<String>("更新失败",false);
+        else return new Result<String>("更新成功",true);
     }
     @RequestMapping(value = "/login",method = RequestMethod.POST, produces = {"application/json; charset=utf-8" })
     @ResponseBody private Result<User> login(@RequestParam("user") String user, @RequestParam("password")String password){

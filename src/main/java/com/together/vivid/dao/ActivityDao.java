@@ -24,4 +24,10 @@ public interface ActivityDao {
     void saveActivity(Activity activity);
 
     void removeActivity(int activity_id);
+
+    int getPartCount(int id);
+
+    Activity getById(int id);
+
+    String getClubName(int id);
 }

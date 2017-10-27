@@ -28,6 +28,43 @@ public class Activity {
     private int privilege;
     private String notes;
 
+    private int readcount;
+    private int partcount;
+    private String organizerName;
+    private String clubName;
+
+    public String getOrganizerName() {
+        return organizerName;
+    }
+
+    public void setOrganizerName(String organizerName) {
+        this.organizerName = organizerName;
+    }
+
+    public String getClubName() {
+        return clubName;
+    }
+
+    public void setClubName(String clubName) {
+        this.clubName = clubName;
+    }
+
+    public int getPartcount() {
+        return partcount;
+    }
+
+    public void setPartcount(int partcount) {
+        this.partcount = partcount;
+    }
+
+    public int getReadcount() {
+        return readcount;
+    }
+
+    public void setReadcount(int readcount) {
+        this.readcount = readcount;
+    }
+
     public Date getStartTime() {
         return startTime;
     }

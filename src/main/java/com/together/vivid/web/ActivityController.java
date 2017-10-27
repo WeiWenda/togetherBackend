@@ -1,5 +1,6 @@
 package com.together.vivid.web;
 
+import com.together.vivid.dto.Result;
 import com.together.vivid.entity.Activity;
 import com.together.vivid.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,11 @@ import java.text.SimpleDateFormat;
 public class ActivityController {
     @Autowired
     ActivityService activitySevice;
+    @RequestMapping(value = "/detail",method = RequestMethod.GET,produces = {"application/json; charset=utf-8"})
+    @ResponseBody
+    private Result<Activity> getById(@RequestParam("id") int id){
+        return new Result<Activity>(true,activitySevice.getById(id));
+    }
     @RequestMapping(value = "/del",method = RequestMethod.POST, produces = {"application/json; charset=utf-8" })
     @ResponseBody
     private String removeActivity(int activity_id){
