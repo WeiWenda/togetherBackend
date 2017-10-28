@@ -7,9 +7,19 @@
         select * from activities where club_id = #{club_id} and
          DATE_SUB(CURRENT_DATE, INTERVAL #{time} DAY) &lt;= date(start_time)
     </select>
+    <select id="queryEnterable" resultType="Activity">
+        SELECT
+        *
+        FROM
+        activities a
+        WHERE
+        CURRENT_TIME &lt;= a.close_time
+        AND a.organizer_id &lt;&gt; #{user_id}
+        AND a.activity_id NOT IN ( SELECT p.activity_id FROM participate p WHERE p.user_id = #{user_id} )
+    </select>
     <select id="queryPreparing" resultType="Activity">
         select a.* from activities a inner join participate p on a.activity_id = p.activity_id
-         where CURRENT_TIME &lt;=  a.start_time and CURRENT_TIME &gt;= a.close_time and p.user_id = #{user_id};
+         where CURRENT_TIME &lt;=  a.start_time and p.user_id = #{user_id};
     </select>
     <select id="queryGoing" resultType="Activity">
         select a.* from activities a inner join participate p on a.activity_id = p.activity_id

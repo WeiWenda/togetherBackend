@@ -83,7 +83,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public List<Activity> getEnterableActivity(int distance, int user_id) {
-        return null;
+        return activityDao.queryEnterable(user_id);
     }
 
     public Boolean saveHabit(Habit unit) {

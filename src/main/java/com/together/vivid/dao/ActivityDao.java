@@ -13,6 +13,8 @@ import java.util.List;
 public interface ActivityDao {
     List<Activity> queryByClubId(@Param("club_id")int club_id,@Param("time") int time);
 
+    List<Activity> queryEnterable(int user_id);
+
     List<Activity> queryPreparing(int user_id);
 
     List<Activity> queryGoing(int user_id);
@@ -30,4 +32,5 @@ public interface ActivityDao {
     Activity getById(int id);
 
     String getClubName(int id);
+
 }

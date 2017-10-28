@@ -70,6 +70,8 @@ public class UserController {
     @RequestMapping(value = "/getActivityList",method = RequestMethod.POST, produces = {"application/json; charset=utf-8" })
     @ResponseBody private Result<List<Activity>> getActivities(@RequestParam("type") String type, @RequestParam("user_id") int user_id){
         switch (type){
+            case "enterable":
+                return new Result<List<Activity>>(true,userService.getEnterableActivity(Integer.MAX_VALUE,user_id));
             case "going":
                 return new Result<>(true,userService.getGoingActivity(user_id));
             case "done":
