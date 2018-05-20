@@ -14,7 +14,10 @@ public interface ClubDao {
 
     void removeClub(int club_id);
 
+    void updateClub(Club club);
+
     List<Club> queryByChiefId(int user_id);
 
     List<Club> queryByMemberId(int user_id);
+
 }

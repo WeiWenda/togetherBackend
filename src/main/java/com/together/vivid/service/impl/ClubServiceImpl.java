@@ -42,4 +42,9 @@ public class ClubServiceImpl implements ClubService {
     public List<Activity> getRecentActivity(int club_id, int time) {
         return activityDao.queryByClubId(club_id,time);
     }
+
+    @Override
+    public void updateClub(Club club) {
+        clubDao.updateClub(club);
+    }
 }

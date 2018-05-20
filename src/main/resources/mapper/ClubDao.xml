@@ -13,11 +13,17 @@
     </select>
     <insert id="saveClub" parameterType="Club" keyProperty="clubId">
         <!-- ignore 主键冲突，报错 -->
-        INSERT ignore INTO clubs (chief_id, address,name,slogan,introduction,callnumber,size,upper_size,chief_name,favicon)
-        VALUES (#{chiefId},#{address},#{name},#{slogan},#{introduction},#{callnumber},#{size},#{upperSize},#{chiefName},#{favicon})
+        INSERT ignore INTO clubs (chief_id, address,name,slogan,introduction,callnumber,size,upper_size,chief_name,favicon,habits)
+        VALUES (#{chiefId},#{address},#{name},#{slogan},#{introduction},#{callnumber},#{size},#{upperSize},#{chiefName},#{favicon},#{habits})
     </insert>
     <delete id="removeClub">
         DELETE from clubs where club_id = #{club_id}
     </delete>
+    <update id="updateClub">
+        update clubs set
+            chief_id = #{chiefId},address = #{address},name = #{name},slogan = #{slogan},introduction = #{introduction},
+            callnumber = #{callnumber},size = #{size},upper_size = #{upperSize},chief_name = #{chiefName},favicon = #{favicon},habits = #{habits}
+        where club_id = #{clubId}
+    </update>
 
 </mapper>

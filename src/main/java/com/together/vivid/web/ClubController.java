@@ -29,4 +29,10 @@ public class ClubController {
         clubService.saveClub(club);
         return club;
     }
+    @RequestMapping(value ="/update",method = RequestMethod.POST,produces = {"application/json; charset=utf-8"})
+    @ResponseBody
+    private String updateClub(@RequestBody Club club){
+        clubService.updateClub(club);
+        return "true";
+    }
 }

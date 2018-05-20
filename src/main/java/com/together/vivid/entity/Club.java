@@ -16,6 +16,7 @@ public class Club {
     private int upperSize;
     private String chiefName;
     private int level;
+    private String habits;
 
     public String getChiefName() {
         return chiefName;
@@ -116,5 +117,13 @@ public class Club {
                 ", clubId=" + clubId +
                 ", level=" + level +
                 '}';
+    }
+
+    public String getHabits() {
+        return habits;
+    }
+
+    public void setHabits(String habits) {
+        this.habits = habits;
     }
 }

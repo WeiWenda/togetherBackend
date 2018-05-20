@@ -35,4 +35,10 @@ public interface ClubService {
      *@Date:14:08 2017/9/28
      */
     List<Activity> getRecentActivity(int club_id,int time);
+    /**
+     *@Author:weiwenda
+     *@Description:根据clubId修改俱乐部信息
+     *@Date:14:46 2018/5/9
+     */
+    void updateClub(Club club);
 }
