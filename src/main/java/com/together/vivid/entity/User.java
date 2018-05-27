@@ -10,14 +10,61 @@ public class User {
     private String name;
     private String password;
     private String favicon;
-    private String sex;
+    private int sex;
     private int age;
+
+    public String getLabels() {
+        return labels;
+    }
+
+    public void setLabels(String labels) {
+        this.labels = labels;
+    }
+
+    public String getHabits() {
+        return habits;
+    }
+
+    public void setHabits(String habits) {
+        this.habits = habits;
+    }
+
+    private String labels;
+    private String habits;
+    public String geteMail() {
+        return eMail;
+    }
+
+    public void seteMail(String eMail) {
+        this.eMail = eMail;
+    }
+
     private String eMail;
     private String phone;
     private String address;
     private Date registerTime;
+    private Date birthday;
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
     private boolean isSeo;
     private boolean isChief;
+    private String signature;
+
+    public String getSignature() {
+        return signature;
+    }
+
+    public void setSignature(String signature) {
+        this.signature = signature;
+    }
+
     private int level;
 
     @Override
@@ -31,13 +78,7 @@ public class User {
                 '}';
     }
 
-    public int getUser_id() {
-        return userId;
-    }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
 
     public String getName() {
         return name;
@@ -63,11 +104,11 @@ public class User {
         this.favicon = favicon;
     }
 
-    public String getSex() {
+    public int getSex() {
         return sex;
     }
 
-    public void setSex(String sex) {
+    public void setSex(int sex) {
         this.sex = sex;
     }
 
@@ -77,14 +118,6 @@ public class User {
 
     public void setAge(int age) {
         this.age = age;
-    }
-
-    public String getEMail() {
-        return eMail;
-    }
-
-    public void setEMail(String eMail) {
-        this.eMail = eMail;
     }
 
     public String getPhone() {
@@ -134,7 +167,7 @@ public class User {
         return userId;
     }
 
-    public String geteMail() {
-        return eMail;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }
