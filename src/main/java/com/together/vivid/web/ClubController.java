@@ -35,4 +35,10 @@ public class ClubController {
         clubService.updateClub(club);
         return "true";
     }
+    @RequestMapping(value ="/delete",method = RequestMethod.POST,produces = {"application/json; charset=utf-8"})
+    @ResponseBody
+    private String removeClub(@RequestBody Club club){
+        clubService.removeClub(club.getClubId());
+        return "true";
+    }
 }
