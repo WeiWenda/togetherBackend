@@ -26,10 +26,10 @@ public class ActivityController {
     private Result<Activity> getById(@RequestParam("id") int id){
         return new Result<Activity>(true,activitySevice.getById(id));
     }
-    @RequestMapping(value = "/delete",method = RequestMethod.POST, produces = {"application/json; charset=utf-8" })
+    @RequestMapping(value = "/del",method = RequestMethod.POST, produces = {"application/json; charset=utf-8" })
     @ResponseBody
-    private String removeActivity(@RequestBody Activity activity){
-        activitySevice.removeActivity(activity.getActivityId());
+    private String removeActivity(int activity_id){
+        activitySevice.removeActivity(activity_id);
         return "true";
     }
     @RequestMapping(value = "/add",method = RequestMethod.POST, produces = {"application/json; charset=utf-8" })

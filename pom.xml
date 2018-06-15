@@ -122,11 +122,6 @@
             <artifactId>spring-webmvc</artifactId>
             <version>4.1.7.RELEASE</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-websocket</artifactId>
-            <version>4.1.7.RELEASE</version>
-        </dependency>
         <!-- 4)Spring test -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -161,13 +156,6 @@
             <groupId>com.qiniu</groupId>
             <artifactId>qiniu-java-sdk</artifactId>
             <version>[7.2.0, 7.2.99]</version>
-        </dependency>
-        <!-- For SockJS -->
-        <!--http://jira.codehaus.org/browse/JACKSON-884 -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.2.1</version>
         </dependency>
     </dependencies>
     
