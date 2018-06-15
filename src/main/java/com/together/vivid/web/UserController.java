@@ -89,12 +89,6 @@ public class UserController {
         if(!tmp) return new Result<String>("更新失败",false);
         else return new Result<String>("更新成功",true);
     }
-    @RequestMapping(value = "/login",method = RequestMethod.POST, produces = {"application/json; charset=utf-8" })
-    @ResponseBody private Result<User> login(@RequestParam("user") String user, @RequestParam("password")String password){
-        User tmp = userService.login(user,password);
-        if(tmp==null) return new Result<User>(false,"登录失败");
-        else return new Result<User>(true,tmp);
-    }
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() {
         return "index";
