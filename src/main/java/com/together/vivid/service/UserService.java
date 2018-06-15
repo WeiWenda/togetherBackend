@@ -25,12 +25,6 @@ public interface UserService {
      */
     User getById(int user_id);
     /**
-    * @Author: weiwenda
-    * @Description:注册服务
-    * @Date: 下午10:35 2018/5/22
-    */
-    User register(String user,String password,String eMail);
-    /**
      *@Author:weiwenda
      *@Description:登录服务
      *@Date:14:33 2017/9/28
@@ -83,5 +77,4 @@ public interface UserService {
      */
     Boolean saveHabit(Habit unit);
 
-    boolean resetPassword(String email);
 }

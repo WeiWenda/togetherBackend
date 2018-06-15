@@ -43,16 +43,10 @@ public class UserServiceImpl implements UserService {
         return userDao.queryById(user_id);
     }
 
-    @Override
-    public User register(String user, String password, String eMail) {
-        userDao.saveUser(user,password,eMail);
-        return login(eMail,password);
-    }
-
     public User login(String user, String password) {
         String reg1 = "^1[3|4|5|8][0-9]\\d{8}$";
         Pattern pattern1 = Pattern.compile(reg1);
-        String reg2 = "^[a-zA-Z0-9_]{1,}[0-9]{0,}@(([a-zA-z0-9]-*){1,}\\.){1,3}[a-zA-z\\-]{1,}$";
+        String reg2 = "^[a-zA-Z_]{1,}[0-9]{0,}@(([a-zA-z0-9]-*){1,}\\.){1,3}[a-zA-z\\-]{1,}$";
         Pattern pattern2 = Pattern.compile(reg2);
         if (pattern1.matcher(user).matches()) {
             User tmp = userDao.queryByPhone(user, password);
@@ -97,16 +91,5 @@ public class UserServiceImpl implements UserService {
             habitDao.saveHabit(unit);
         return true;
     }
-
-  @Override
-  public boolean resetPassword(String email) {
-      User user = userDao.queryByOnlyEmail(email);
-    if(user!=null){
-      userDao.updateById(user.getUserId(),"password","");
-      return true;
-    }
-    else
-      return false;
-  }
 
 }

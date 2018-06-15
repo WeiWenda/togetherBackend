@@ -4,11 +4,6 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.together.vivid.dao.UserDao">
     <!-- 目的：为dao接口方法提供sql语句配置 -->
-    <insert id="saveUser">
-        <!-- ignore 主键冲突，报错 -->
-        INSERT ignore INTO users (name,password,e_mail)
-        VALUES (#{name},#{password},#{email})
-    </insert>
     <update id="updateById">
         update users set
         <choose>
@@ -47,15 +42,6 @@
         users
         WHERE
         e_mail = #{email} and password = #{password}
-    </select>
-    <select id="queryByOnlyEmail" resultType="User">
-        <!-- 具体的sql -->
-        SELECT
-        *
-        FROM
-        users
-        WHERE
-        e_mail = #{email}
     </select>
     <select id="queryByClubID" resultType="User">
         select u.*,m.level from users u inner join membership m on u.user_id = m.user_id

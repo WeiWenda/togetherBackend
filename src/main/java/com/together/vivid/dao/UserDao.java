@@ -9,7 +9,6 @@ import java.util.List;
  * Created by weiwenda on 2017/9/26.
  */
 public interface UserDao {
-    void saveUser(@Param("name")String name,@Param("password")String password,@Param("email")String email);
 
     User queryById(int id);
 
@@ -20,6 +19,4 @@ public interface UserDao {
     List<User> queryByClubID(int club_id);
 
     void updateById(@Param("user_id") int user_id,@Param("domain")String domain,@Param("value")String new_value);
-
-    User queryByOnlyEmail(@Param("email") String e_mail);
 }
