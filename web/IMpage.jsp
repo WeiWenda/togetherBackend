@@ -1,13 +1,5 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: weiwenda
-  Date: 2018/6/15
-  Time: 下午2:13
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+         pageEncoding="UTF-8" %>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -28,7 +20,7 @@ welcome<br />
     var websocket = null;
     //判断浏览器是否支持websocket
     if('WebSocket' in window) {
-        websocket = new WebSocket("ws://localhost:8080/together//hello");
+        websocket = new WebSocket("ws://localhost:8080/hello");
     }else{
         $("#message").html("该浏览器不支持实时通信功能");
     }

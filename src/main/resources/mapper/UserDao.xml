@@ -61,6 +61,14 @@
         select u.*,m.level from users u inner join membership m on u.user_id = m.user_id
         where m.club_id = #{club_id}
     </select>
-
+    <resultMap id="VisibleUser" type="java.util.HashMap">
+        <id column="user_id" property="user_id" jdbcType="BIGINT" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="favicon" property="favicon" jdbcType="VARCHAR" />
+    </resultMap>
+    <select id="queryByFriendship" resultMap="VisibleUser">
+        select u.favicon,u.name,u.user_id from users u inner join friends f on u.user_id = f.friend_id
+        where f.user_id = #{user_id}
+    </select>
 
 </mapper>

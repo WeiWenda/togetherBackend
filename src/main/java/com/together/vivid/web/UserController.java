@@ -20,6 +20,7 @@ import org.springframework.util.comparator.BooleanComparator;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by weiwenda on 2017/9/26.
@@ -57,6 +58,11 @@ public class UserController {
         Boolean tmp = userService.saveHabit(unit);
         if(!tmp) return new Result<String>("更新失败",false);
         else return new Result<String>("更新成功",true);
+    }
+    @RequestMapping(value = "/getFriendList",method = RequestMethod.GET,produces = {"application/json; charset=utf-8" })
+    @ResponseBody private  Result<List<Map<String, Object>>> getFriends(@RequestParam("user_id") int user_id){
+      return new Result<>(true,userService.getFriends(user_id));
+
     }
     @RequestMapping(value = "/getClubList",method = RequestMethod.POST, produces = {"application/json; charset=utf-8" })
     @ResponseBody private Result<List<Club>> getClubs(@RequestParam("type") String type,@RequestParam("user_id") int user_id){
